@@ -29,4 +29,31 @@ Output: "ps"
  
  Solution:
 
- 
+ class Solution {
+public:
+    string removeDuplicates(string s, int k) {
+        // stack of {character, count}
+        stack<pair<char, int>> st;
+
+        for (char c : s) {
+            if (!st.empty() && st.top().first == c) {
+                st.top().second++; // increase count
+                if (st.top().second == k) {
+                    st.pop(); // remove when count == k
+                }
+            } else {
+                st.push({c, 1});
+            }
+        }
+
+        // rebuild result
+        string result = "";
+        while (!st.empty()) {
+            result.append(st.top().second, st.top().first);
+            st.pop();
+        }
+
+        reverse(result.begin(), result.end());
+        return result;
+    }
+};
