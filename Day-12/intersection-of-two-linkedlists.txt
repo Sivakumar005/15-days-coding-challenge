@@ -46,4 +46,29 @@ Output: No intersection
 Explanation: From the head of A, it reads as [2,6,4]. From the head of B, it reads as [1,5]. Since the two lists do not intersect, intersectVal must be 0, while skipA and skipB can be arbitrary values.
 Explanation: The two lists do not intersect, so return null.
  
- 
+ Solution:
+
+ /**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if(!headA||!headB){
+            return nullptr;
+        }
+        ListNode* pa=headA;
+        ListNode* pb=headB;
+        while(pa!=pb){
+            pa=pa?pa->next:headB;
+            pb=pb?pb->next:headA;
+        }
+        return pa;
+        
+    }
+};
